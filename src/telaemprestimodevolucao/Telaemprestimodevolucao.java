@@ -1,4 +1,4 @@
-package telatabela;
+package telaemprestimodevolucao;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -14,7 +14,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class Telatabela extends JFrame {
+public class Telaemprestimodevolucao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -29,7 +29,7 @@ public class Telatabela extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Telatabela chamar = new Telatabela();
+		Telaemprestimodevolucao chamar = new Telaemprestimodevolucao();
 		chamar.chamar();
 	}
 	
@@ -43,7 +43,7 @@ public class Telatabela extends JFrame {
 			public void run() {
 				try {
 					 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					 Telatabela frame = new Telatabela();
+					 Telaemprestimodevolucao frame = new Telaemprestimodevolucao();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +55,8 @@ public class Telatabela extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Telatabela() {
-		setTitle("TELA AUTORES");
+	public Telaemprestimodevolucao() {
+		setTitle("TELA DE EMPRESTIMOS E DEVOLUÇÃO");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 817, 511);
 		contentPane = new JPanel();
@@ -76,12 +76,12 @@ public class Telatabela extends JFrame {
 		panel = new JPanel();
 		panel.setBounds(54, 11, 663, 72);
 		panel.setToolTipText("");
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "OP\u00C7\u00D5ES TABELA", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "EMPRESTIMOS E DEVOLU\u00C7\u00C3O", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBackground(new Color(0,0,0,0));
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		btnInserirLivro = new JButton("INSERIR AUTOR");
+		btnInserirLivro = new JButton("<HTML><CENTER>INSERIR <BR> EMPRESTIMO<HTML><CENTER>");
 		btnInserirLivro.setBounds(53, 23, 151, 38);
 		panel.add(btnInserirLivro);
 		btnInserirLivro.setToolTipText("");
@@ -90,7 +90,7 @@ public class Telatabela extends JFrame {
 		btnInserirLivro.setBackground(Color.green);
 		btnInserirLivro.setFont(new Font("Arial", Font.BOLD, 14));
 		
-		btnDeletarLivro = new JButton("DELETAR AUTOR");
+		btnDeletarLivro = new JButton("CANCELAR DADOS");
 		btnDeletarLivro.setBounds(244, 23, 167, 38);
 		panel.add(btnDeletarLivro);
 		btnDeletarLivro.setToolTipText("");
@@ -99,7 +99,7 @@ public class Telatabela extends JFrame {
 		btnDeletarLivro.setBackground(Color.red);
 		btnDeletarLivro.setFont(new Font("Arial", Font.BOLD, 14));
 		
-		btnAlterarLivro = new JButton("ALTERAR AUTOR");
+		btnAlterarLivro = new JButton("<HTML><CENTER>INSERIR <BR> DEVOLUÇÃO<HTML><CENTER>");
 		btnAlterarLivro.setBounds(453, 23, 167, 38);
 		panel.add(btnAlterarLivro);
 		btnAlterarLivro.setToolTipText("");
