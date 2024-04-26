@@ -1,0 +1,35 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-18f1063697f-e853af27632b019": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "bancobiblioteca.db",
+			"save-password": true,
+			"configuration": {
+				"database": "C:\\bancodados\\bancobiblioteca.db",
+				"url": "jdbc:sqlite:C:\\bancodados\\bancobiblioteca.db",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Desenvolvimento",
+			"color": "255,255,255",
+			"description": "Banco de dados de desenvolvimento",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": false,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}
