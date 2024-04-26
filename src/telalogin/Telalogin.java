@@ -21,6 +21,10 @@ import javax.swing.border.CompoundBorder;
 
 import conexoes.Conexaobancologin;
 import telainicial.Telainicial;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Window.Type;
+import java.awt.Frame;
 
 public class Telalogin extends JFrame {
 	
@@ -53,30 +57,38 @@ public class Telalogin extends JFrame {
 		});
 	}
 	public Telalogin() {
+		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 244);
+		setBounds(100, 100, 467, 256);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(128, 128, 255));
 		contentPane.setBorder(new CompoundBorder());
 		contentPane.setLayout(null);
 
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("LOGIN*");
+		JLabel lblNewLabel = new JLabel("USUÁRIO*");
+		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(138, 49, 46, 14);
+		lblNewLabel.setBounds(111, 46, 99, 14);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(187, 46, 86, 20);
+		textField.setBounds(213, 43, 115, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("SENHA*");
+		lblSenha.setFont(new Font("Arial Black", Font.BOLD, 14));
 		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSenha.setBounds(138, 77, 46, 14);
+		lblSenha.setBounds(111, 74, 99, 14);
 		contentPane.add(lblSenha);
 		
 		JButton btnNewButton = new JButton("ENTRAR");
+		btnNewButton.setFont(new Font("Arial Black", Font.BOLD, 14));
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setOpaque(true);
+		btnNewButton.setBackground(Color.green);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean verificar = dados(textField)||
@@ -90,15 +102,19 @@ public class Telalogin extends JFrame {
 	
 			}
 		});
-		btnNewButton.setBounds(114, 128, 89, 23);
+		btnNewButton.setBounds(93, 113, 115, 35);
 		contentPane.add(btnNewButton);
 		
 		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(222, 128, 99, 23);
+		btnRegistrar.setFont(new Font("Arial Black", Font.BOLD, 14));
+		btnRegistrar.setContentAreaFilled(false);
+		btnRegistrar.setOpaque(true);
+		btnRegistrar.setBackground(Color.lightGray);
+		btnRegistrar.setBounds(229, 113, 127, 35);
 		contentPane.add(btnRegistrar);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(187, 74, 86, 20);
+		passwordField.setBounds(213, 71, 115, 20);
 		contentPane.add(passwordField);
 		btnRegistrar.addActionListener(new ActionListener() {
 			

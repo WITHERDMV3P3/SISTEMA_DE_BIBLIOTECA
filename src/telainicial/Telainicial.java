@@ -51,6 +51,7 @@ public class Telainicial extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 579, 404);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(128, 128, 255));
 		contentPane.setBorder(new CompoundBorder());
 		contentPane.setLayout(null);
 
@@ -60,34 +61,34 @@ public class Telainicial extends JFrame {
 		btncliente.setToolTipText("");
 		btncliente.setOpaque(true);
 		btncliente.setFont(new Font("Arial", Font.BOLD, 14));
-		btncliente.setBounds(97, 109, 141, 59);
+		btncliente.setBounds(97, 102, 141, 59);
 		contentPane.add(btncliente);
 		
 		btnLivros = new JButton("LIVROS");
 		btnLivros.setToolTipText("");
 		btnLivros.setOpaque(true);
 		btnLivros.setFont(new Font("Arial", Font.BOLD, 14));
-		btnLivros.setBounds(320, 109, 141, 59);
+		btnLivros.setBounds(320, 102, 141, 59);
 		contentPane.add(btnLivros);
 		
 		btnAutores = new JButton("AUTORES");
 		btnAutores.setToolTipText("");
 		btnAutores.setOpaque(true);
 		btnAutores.setFont(new Font("Arial", Font.BOLD, 14));
-		btnAutores.setBounds(97, 207, 141, 59);
+		btnAutores.setBounds(97, 200, 141, 59);
 		contentPane.add(btnAutores);
 		
 		btnTabela = new JButton("TABELA");
 		btnTabela.setToolTipText("");
 		btnTabela.setOpaque(true);
 		btnTabela.setFont(new Font("Arial", Font.BOLD, 14));
-		btnTabela.setBounds(320, 207, 141, 59);
+		btnTabela.setBounds(320, 200, 141, 59);
 		contentPane.add(btnTabela);
 		
 		lblNewLabel = new JLabel("BEM VINDO(A) A NOSSA BIBLIOTECA, O QUE DESEJA:");
 		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 13));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(10, 67, 543, 31);
+		lblNewLabel.setBounds(10, 60, 543, 31);
 		contentPane.add(lblNewLabel);
 	}
 	}
