@@ -90,7 +90,7 @@ public class Telaemprestimodevolucao extends JFrame {
 		btnInserirLivro.setBackground(Color.green);
 		btnInserirLivro.setFont(new Font("Arial", Font.BOLD, 14));
 		
-		btnDeletarLivro = new JButton("CANCELAR DADOS");
+		btnDeletarLivro = new JButton("CANCELAR");
 		btnDeletarLivro.setBounds(244, 23, 167, 38);
 		panel.add(btnDeletarLivro);
 		btnDeletarLivro.setToolTipText("");
@@ -105,7 +105,7 @@ public class Telaemprestimodevolucao extends JFrame {
 		btnAlterarLivro.setToolTipText("");
 		btnAlterarLivro.setContentAreaFilled(false);
 		btnAlterarLivro.setOpaque(true);
-		btnAlterarLivro.setBackground(Color.lightGray);
+		btnAlterarLivro.setBackground(Color.green);
 		btnAlterarLivro.setFont(new Font("Arial", Font.BOLD, 14));
 	}
 
