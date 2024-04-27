@@ -23,9 +23,14 @@ import javax.swing.border.CompoundBorder;
 import conexoes.Conexaobancologin;
 import telainicial.Telainicial;
 import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Window.Type;
 import java.awt.Frame;
+import java.awt.Image;
+
+import javax.swing.JEditorPane;
+import javax.swing.ImageIcon;
 
 public class Telalogin extends JFrame {
 	
@@ -34,7 +39,11 @@ public class Telalogin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	private JPanel panel;
+	private JLabel imagem;
+	private JLabel label;
 	private JPasswordField passwordField;
+	private JButton btnSair;
 
 	/**
 	 * Launch the application.
@@ -64,10 +73,11 @@ public class Telalogin extends JFrame {
 		});
 	}
 	public Telalogin() {
+		setUndecorated(true);
 		setTitle("TELA LOGIN");
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 512, 275);
+		setBounds(100, 100, 505, 467);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(128, 128, 255));
 		contentPane.setBorder(new CompoundBorder());
@@ -75,31 +85,78 @@ public class Telalogin extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JLabel lblNewLabel = new JLabel("USUÁRIO*");
-		lblNewLabel.setForeground(new Color(0, 0, 0));
-		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 14));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(115, 65, 99, 14);
-		contentPane.add(lblNewLabel);
+		panel = new JPanel();
+		panel.setBounds(60, 59, 381, 353);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Arial", Font.PLAIN, 14));
-		textField.setBounds(217, 62, 152, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblSenha = new JLabel("SENHA*");
-		lblSenha.setForeground(new Color(0, 0, 0));
-		lblSenha.setFont(new Font("Arial Black", Font.BOLD, 14));
-		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSenha.setBounds(115, 93, 99, 14);
-		contentPane.add(lblSenha);
+		JButton btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.setBounds(186, 239, 136, 35);
+		panel.add(btnRegistrar);
+		btnRegistrar.setFont(new Font("Arial Black", Font.BOLD, 14));
+		btnRegistrar.setContentAreaFilled(false);
+		btnRegistrar.setOpaque(true);
+		btnRegistrar.setBackground(Color.lightGray);
 		
 		JButton btnNewButton = new JButton("ENTRAR");
+		btnNewButton.setBounds(50, 239, 115, 35);
+		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("Arial Black", Font.BOLD, 14));
 		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setOpaque(true);
 		btnNewButton.setBackground(Color.green);
+		
+		btnSair = new JButton("SAIR");
+		btnSair.setFont(new Font("Arial Black", Font.BOLD, 14));
+		btnSair.setContentAreaFilled(false);
+		btnSair.setOpaque(true);
+		btnSair.setBackground(Color.RED);
+		btnSair.setBounds(123, 288, 115, 35);
+		btnSair.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sair();
+				
+			}
+		});
+		panel.add(btnSair);
+		
+		JLabel lblSenha = new JLabel("SENHA*");
+		lblSenha.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblSenha.setBounds(10, 161, 361, 14);
+		panel.add(lblSenha);
+		lblSenha.setForeground(new Color(0, 0, 0));
+		lblSenha.setFont(new Font("Arial Black", Font.BOLD, 14));
+		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setBounds(109, 123, 163, 27);
+		panel.add(textField);
+		textField.setFont(new Font("Arial", Font.PLAIN, 14));
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("USUÁRIO*");
+		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblNewLabel.setBounds(10, 105, 361, 14);
+		panel.add(lblNewLabel);
+		lblNewLabel.setForeground(new Color(0, 0, 0));
+		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		label = new JLabel("");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setIcon(new ImageIcon(Telalogin.class.getResource("/Imagens/biblioteca (1).png")));
+		label.setBounds(10, 45, 361, 49);
+		panel.add(label);
+		
+		passwordField = new JPasswordField();
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordField.setBounds(109, 180, 163, 27);
+		panel.add(passwordField);
+		
+		
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean verificar = dados(textField)||
@@ -113,20 +170,6 @@ public class Telalogin extends JFrame {
 	
 			}
 		});
-		btnNewButton.setBounds(115, 132, 115, 35);
-		contentPane.add(btnNewButton);
-		
-		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setFont(new Font("Arial Black", Font.BOLD, 14));
-		btnRegistrar.setContentAreaFilled(false);
-		btnRegistrar.setOpaque(true);
-		btnRegistrar.setBackground(Color.lightGray);
-		btnRegistrar.setBounds(251, 132, 136, 35);
-		contentPane.add(btnRegistrar);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(217, 90, 152, 20);
-		contentPane.add(passwordField);
 		btnRegistrar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -143,6 +186,10 @@ public class Telalogin extends JFrame {
 	});
 }
 	
+	private void sair() {
+		System.exit(0);		
+	}
+
 	public void entrar() {
 		String sql = "SELECT * FROM biblioteca_login WHERE usuario = ? AND senha = ?";
 		try { con = dao.conexaologin();
