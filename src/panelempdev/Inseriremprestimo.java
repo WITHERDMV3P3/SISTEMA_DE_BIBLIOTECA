@@ -1,4 +1,4 @@
-package telaemprestimodevolucao;
+package panelempdev;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Inserirdevolucao extends JFrame {
+public class Inseriremprestimo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class Inserirdevolucao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inserirdevolucao frame = new Inserirdevolucao();
+					Inseriremprestimo frame = new Inseriremprestimo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class Inserirdevolucao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Inserirdevolucao() {
+	public Inseriremprestimo() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

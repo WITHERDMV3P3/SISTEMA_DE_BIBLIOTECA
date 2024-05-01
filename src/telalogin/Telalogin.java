@@ -162,7 +162,7 @@ public class Telalogin extends JFrame {
 				Boolean verificar = dados(textField)||
 						dados(passwordField);
 			if(verificar) {
-				JOptionPane.showMessageDialog(null, "CAMPO(S) VAZIO(S), PREENCHA TODOS OS CAMPOS OBRIGATÓRIO *","ATENÇÃO",2);
+				JOptionPane.showMessageDialog(null, "Campo(s) vazio(s), preencha todos os campos obrigatório *","ATENÇÃO",2);
 			}else {
 				if(e.getSource() == btnNewButton) {
 					entrar();}
@@ -178,7 +178,7 @@ public class Telalogin extends JFrame {
 				Boolean verificar = dados(textField)||
 									dados(passwordField);
 						if(verificar) {
-							JOptionPane.showMessageDialog(null, "CAMPO(S) VAZIO(S), PREENCHA TODOS OS CAMPOS OBRIGATÓRIO *","ATENÇÃO",2);
+							JOptionPane.showMessageDialog(null, "Campo(s) vazio(s), preencha todos os campos obrigatório *","ATENÇÃO",2);
 						}else {
 				registar();
 			}
@@ -203,7 +203,7 @@ public class Telalogin extends JFrame {
 				chamarjanela.setLocationRelativeTo(null);
 				this.setVisible(false);
 			}else {
-				JOptionPane.showMessageDialog(null, "USUÁRIO OU SENHA INCORRETA OU NÃO REGISTRADO, TENTE NOVAMENTE","ATENÇÃO",2);
+				JOptionPane.showMessageDialog(null, "Usuário ou senha incorreta ou não registrado, tente novamente","ATENÇÃO",2);
 			}
 			con.close();
 			registro.close();
@@ -225,7 +225,7 @@ public class Telalogin extends JFrame {
 				
 				if(resultadoconsultar.next()) {
 					
-					JOptionPane.showMessageDialog(null, "USUÁRIO EXISTENTE,TENTE NOVAMENTE","ATENÇÃO",2);
+					JOptionPane.showMessageDialog(null, "Usuário existente, tente novamente","ATENÇÃO",2);
 					
 				}else {
 					
@@ -234,7 +234,7 @@ public class Telalogin extends JFrame {
 					registro.setString(2, passwordField.getText().toString());
 					registro.execute();
 					registro.close();
-					JOptionPane.showMessageDialog(null, "REGISTRADO COM SUCESSO","ATENÇÃO",1);
+					JOptionPane.showMessageDialog(null, "Registrado com sucesso","ATENÇÃO",1);
 				
 				}
 				

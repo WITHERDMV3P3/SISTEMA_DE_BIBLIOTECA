@@ -1,4 +1,4 @@
-package telacliente;
+package paneltelacliente;
 
 import java.awt.EventQueue;
 
@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Alterarcliente extends JFrame {
+public class Inserircliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -18,7 +18,7 @@ public class Alterarcliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Alterarcliente frame = new Alterarcliente();
+					Inserircliente frame = new Inserircliente();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class Alterarcliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Alterarcliente() {
+	public Inserircliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

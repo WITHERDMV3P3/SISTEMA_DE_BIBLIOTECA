@@ -1,4 +1,4 @@
-package telacliente;
+package paneltelacliente;
 
 import java.awt.Color;
 import java.awt.EventQueue;

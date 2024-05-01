@@ -1,28 +1,28 @@
 package telainicial;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import telacliente.Telacliente;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
-
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Rectangle;
-import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+
+import panelautores.Autores;
+import panelcliente.Cliente;
+import panelempdev.Emprestimoedevolucoes;
+import panellivro.Livro;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class Telainicial extends JFrame {
 
@@ -40,6 +40,9 @@ public class Telainicial extends JFrame {
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JPanel panel_4;
+	private JButton btnTelaInicial;
+	private JPanel panel_5;
+	private JPanel panel_6;
 	/**
 	 * Launch the application.
 	 */
@@ -72,28 +75,28 @@ public class Telainicial extends JFrame {
 		setUndecorated(true);
 		setTitle("TELA PRINCIPAL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 961, 701);
+		setBounds(100, 100, 953, 603);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new CompoundBorder());
 		contentPane.setLayout(null);
-
 		setContentPane(contentPane);
 		
 		panel = new JPanel();
-		panel.setBackground(new Color(0, 102, 204));
-		panel.setBounds(0, 0, 180, 701);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBounds(0, 0, 180, 603);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		btncliente = new JButton("CLIENTE");
+		btncliente = new JButton("Cliente");
 		btncliente.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btncliente.setBounds(10, 198, 160, 59);
+		btncliente.setBounds(10, 127, 160, 59);
 		panel.add(btncliente);
 		btncliente.setForeground(new Color(0, 0, 0));
 		btncliente.setContentAreaFilled(false);
 		btncliente.setOpaque(true);
-		btncliente.setBackground(new Color(102, 255, 204));
+		btncliente.setBackground(new Color(51, 255, 204));
 		btncliente.setFont(new Font("Arial", Font.BOLD, 15));
 		btncliente.addActionListener(new ActionListener() {
 			
@@ -103,9 +106,9 @@ public class Telainicial extends JFrame {
 			}
 		});
 		
-		btnAutores = new JButton("AUTORES");
+		btnAutores = new JButton("Autores");
 		btnAutores.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btnAutores.setBounds(10, 268, 160, 59);
+		btnAutores.setBounds(10, 205, 160, 59);
 		panel.add(btnAutores);
 		btnAutores.setContentAreaFilled(false);
 		btnAutores.setOpaque(true);
@@ -116,26 +119,48 @@ public class Telainicial extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				chamartelaautores();
-				
 			}
 		});
 		
-		btnLivros = new JButton("LIVROS");
+		btnLivros = new JButton("Livros");
 		btnLivros.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btnLivros.setBounds(10, 338, 160, 59);
+		btnLivros.setBounds(10, 291, 160, 59);
 		panel.add(btnLivros);
 		btnLivros.setContentAreaFilled(false);
 		btnLivros.setOpaque(true);
 		btnLivros.setBackground(new Color(51, 255, 204));
 		btnLivros.setFont(new Font("Arial", Font.BOLD, 15));
+		btnLivros.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				chamartelalivro();
+			}
+		});
 		
-		btnSair = new JButton("SAIR");
+		btnEmprestimoeDevolucoes = new JButton("<html><center>Empréstimo<br>e Devolução<html><center>");
+		btnEmprestimoeDevolucoes.setBorder(UIManager.getBorder("InternalFrame.border"));
+		btnEmprestimoeDevolucoes.setFont(new Font("Arial", Font.BOLD, 15));
+		btnEmprestimoeDevolucoes.setContentAreaFilled(false);
+		btnEmprestimoeDevolucoes.setOpaque(true);
+		btnEmprestimoeDevolucoes.setBackground(new Color(0, 204, 255));
+		btnEmprestimoeDevolucoes.setBounds(10, 374, 160, 59);
+		panel.add(btnEmprestimoeDevolucoes);
+		btnEmprestimoeDevolucoes.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				chamartelaempdev();
+			}
+		});;
+		
+		
+		btnSair = new JButton("Sair");
 		btnSair.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btnSair.setBounds(10, 603, 160, 59);
+		btnSair.setBounds(29, 551, 128, 41);
 		panel.add(btnSair);
 		btnSair.setContentAreaFilled(false);
 		btnSair.setOpaque(true);
-		btnSair.setBackground(new Color(51, 255, 204));
+		btnSair.setBackground(Color.RED);
 		btnSair.setFont(new Font("Arial", Font.BOLD, 15));
 		btnSair.addActionListener(new ActionListener() {
 			
@@ -155,41 +180,98 @@ public class Telainicial extends JFrame {
 			}
 		});
 		
-		btnEmprestimoeDevolucoes = new JButton("<html><center>EMPRESTIMOS<br>E DEVOLUÇÃO<html><center>");
-		btnEmprestimoeDevolucoes.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btnEmprestimoeDevolucoes.setFont(new Font("Arial", Font.BOLD, 15));
-		btnEmprestimoeDevolucoes.setContentAreaFilled(false);
-		btnEmprestimoeDevolucoes.setOpaque(true);
-		btnEmprestimoeDevolucoes.setBackground(new Color(0, 204, 255));
-		btnEmprestimoeDevolucoes.setBounds(10, 408, 160, 59);
-		panel.add(btnEmprestimoeDevolucoes);
 		
+		btnTelaInicial = new JButton("Início");
+		btnTelaInicial.setFont(new Font("Arial", Font.BOLD, 15));
+		btnTelaInicial.setContentAreaFilled(false);
+		btnTelaInicial.setOpaque(true);
+		btnTelaInicial.setBorder(UIManager.getBorder("InternalFrame.border"));
+		btnTelaInicial.setBackground(new Color(0, 204, 255));
+		btnTelaInicial.setBounds(10, 54, 160, 59);
+		panel.add(btnTelaInicial);
+		btnTelaInicial.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				chamartelainicial();
+				
+			}
+		});
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(170, -29, 806, 745);
+		tabbedPane.setBounds(170, -29, 806, 643);
 		contentPane.add(tabbedPane);
+		
+		panel_5 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_5, null);
+		panel_5.setLayout(null);
 		
 		panel_1 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_1, null);
 		panel_1.setLayout(null);
+		Cliente cliente = new Cliente();
+		cliente.setBorder(new LineBorder(new Color(0, 0, 0), 10));
+		cliente.setSize(791,706);
+		cliente.setLocation(0,0);
+		panel_1.removeAll();
+		panel_1.add(cliente,BorderLayout.CENTER);
+		panel_1.revalidate();
+		panel_1.repaint();
 		
 		panel_2 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_2, null);
 		panel_2.setLayout(null);
+		Autores autores = new Autores();
+		autores.setBorder(new LineBorder(new Color(0, 0, 0), 10));
+		autores.setSize(791,706);
+		autores.setLocation(0,0);
+		panel_2.removeAll();
+		panel_2.add(autores,BorderLayout.CENTER);
+		panel_2.revalidate();
+		panel_2.repaint();
+		
 		
 		panel_3 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_3, null);
 		panel_3.setLayout(null);
+		Livro livro = new Livro();
+		livro.setBorder(new LineBorder(new Color(0, 0, 0), 10));
+		livro.setSize(791,706);
+		livro.setLocation(0,0);
+		panel_3.removeAll();
+		panel_3.add(livro,BorderLayout.CENTER);
+		panel_3.revalidate();
+		panel_3.repaint();
 		
 		panel_4 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_4, null);
 		panel_4.setLayout(null);
-	}
-
-	protected void chamartelaautores() {
-		tabbedPane.setSelectedIndex(1);
+		Emprestimoedevolucoes empdev= new Emprestimoedevolucoes();
+		empdev.setBorder(new LineBorder(new Color(0, 0, 0), 10));
+		empdev.setSize(791,706);
+		empdev.setLocation(0, 0);
+		panel_4.removeAll();
+		panel_4.add(empdev,BorderLayout.CENTER);
+		panel_4.revalidate();
+		panel_4.repaint();
+		
 	}
 
 	private void chamartelacliente() {
+		tabbedPane.setSelectedIndex(1);
+	}
+
+	private void chamartelaautores() {
+		tabbedPane.setSelectedIndex(2);
+	}
+	
+	private void chamartelalivro() {
+		tabbedPane.setSelectedIndex(3);
+	}
+	private void chamartelaempdev() {
+		tabbedPane.setSelectedIndex(4);
+	}
+	private void chamartelainicial() {
 		tabbedPane.setSelectedIndex(0);
 	}
 	}
