@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 
-import conexoes.Conexaobancologin;
+import conexoes.Conexaobancobib;
 import telainicial.Telainicial;
 import java.awt.Font;
 import java.awt.BorderLayout;
@@ -34,7 +34,7 @@ import javax.swing.ImageIcon;
 
 public class Telalogin extends JFrame {
 	
-	Conexaobancologin dao = new Conexaobancologin();
+	Conexaobancobib dao = new Conexaobancobib();
 	private Connection con;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -91,24 +91,27 @@ public class Telalogin extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnRegistrar = new JButton("REGISTRAR");
-		btnRegistrar.setBounds(186, 239, 136, 35);
+		btnRegistrar.setIcon(new ImageIcon(Telalogin.class.getResource("/Imagens/pngegg.png")));
+		btnRegistrar.setBounds(186, 239, 155, 35);
 		panel.add(btnRegistrar);
 		btnRegistrar.setFont(new Font("Arial Black", Font.BOLD, 14));
-		btnRegistrar.setContentAreaFilled(false);
+	//	btnRegistrar.setContentAreaFilled(false);
 		btnRegistrar.setOpaque(true);
 		btnRegistrar.setBackground(Color.lightGray);
 		
 		JButton btnNewButton = new JButton("ENTRAR");
-		btnNewButton.setBounds(50, 239, 115, 35);
+		btnNewButton.setIcon(new ImageIcon(Telalogin.class.getResource("/Imagens/entrar (1).png")));
+		btnNewButton.setBounds(36, 239, 129, 35);
 		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("Arial Black", Font.BOLD, 14));
-		btnNewButton.setContentAreaFilled(false);
+		//btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setOpaque(true);
 		btnNewButton.setBackground(Color.green);
 		
 		btnSair = new JButton("SAIR");
+		btnSair.setIcon(new ImageIcon(Telalogin.class.getResource("/Imagens/sair.png")));
 		btnSair.setFont(new Font("Arial Black", Font.BOLD, 14));
-		btnSair.setContentAreaFilled(false);
+	//	btnSair.setContentAreaFilled(false);
 		btnSair.setOpaque(true);
 		btnSair.setBackground(Color.RED);
 		btnSair.setBounds(123, 288, 115, 35);
@@ -187,12 +190,12 @@ public class Telalogin extends JFrame {
 }
 	
 	private void sair() {
-		System.exit(0);		
+		System.exit(0);			
 	}
 
 	public void entrar() {
-		String sql = "SELECT * FROM biblioteca_login WHERE usuario = ? AND senha = ?";
-		try { con = dao.conexaologin();
+		String sql = "SELECT * FROM biblioteca_dados WHERE usuario = ? AND senha = ?";
+		try { con = dao.conexaobib();
 		PreparedStatement registro = con.prepareStatement(sql);
 			registro.setString(1, textField.getText().toString());
 			registro.setString(2, passwordField.getText().toString());
@@ -215,10 +218,10 @@ public class Telalogin extends JFrame {
 	
 	private void registar() {
 		
-		String sql = "INSERT INTO biblioteca_login(usuario,senha) VALUES (?,?)";
-		String sql2 = "SELECT * FROM biblioteca_login WHERE usuario = ?";
+		String sql = "INSERT INTO biblioteca_dados(usuario,senha) VALUES (?,?)";
+		String sql2 = "SELECT * FROM biblioteca_dados WHERE usuario = ?";
 		
-		try {con = dao.conexaologin();
+		try {con = dao.conexaobib();
 			PreparedStatement consultar = con.prepareStatement(sql2);
 				consultar.setString(1, textField.getText().toString());
 				ResultSet resultadoconsultar = consultar.executeQuery();

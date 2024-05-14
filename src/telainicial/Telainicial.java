@@ -23,6 +23,7 @@ import panelempdev.Emprestimoedevolucoes;
 import panellivro.Livro;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class Telainicial extends JFrame {
 
@@ -155,10 +156,11 @@ public class Telainicial extends JFrame {
 		
 		
 		btnSair = new JButton("Sair");
+		btnSair.setIcon(new ImageIcon(Telainicial.class.getResource("/Imagens/sair.png")));
 		btnSair.setBorder(UIManager.getBorder("InternalFrame.border"));
 		btnSair.setBounds(29, 551, 128, 41);
 		panel.add(btnSair);
-		btnSair.setContentAreaFilled(false);
+	//	btnSair.setContentAreaFilled(false);
 		btnSair.setOpaque(true);
 		btnSair.setBackground(Color.RED);
 		btnSair.setFont(new Font("Arial", Font.BOLD, 15));
