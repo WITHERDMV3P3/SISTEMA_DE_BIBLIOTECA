@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -89,6 +91,15 @@ public class Telainicial extends JFrame {
 		panel.setBounds(0, 0, 180, 603);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+	/*	addWindowListener(new WindowAdapter() {
+			Cliente cliente = new Cliente();
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Quando a janela é fechada pelo botão de fechar (X), notifica a tela um para atualizar a JTable
+               cliente.atualizar();
+            }
+        }); */
 		
 		btncliente = new JButton("Cliente");
 		btncliente.setBorder(UIManager.getBorder("InternalFrame.border"));
@@ -258,6 +269,8 @@ public class Telainicial extends JFrame {
 		panel_4.repaint();
 		
 	}
+	
+	
 
 	private void chamartelacliente() {
 		tabbedPane.setSelectedIndex(1);
