@@ -21,7 +21,7 @@ import javax.swing.border.LineBorder;
 
 import panelautores.Autores;
 import panelcliente.Cliente;
-import panelempdev.Emprestimoedevolucoes;
+import panelempdev.Paneldeemprestimodevolucoes;
 import panellivro.Livro;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -102,11 +102,12 @@ public class Telainicial extends JFrame {
         }); */
 		
 		btncliente = new JButton("Cliente");
+		btncliente.setHorizontalTextPosition(SwingConstants.LEADING);
+		btncliente.setIcon(new ImageIcon(Telainicial.class.getResource("/Imagens/cliente (1).png")));
 		btncliente.setBorder(UIManager.getBorder("InternalFrame.border"));
 		btncliente.setBounds(10, 127, 160, 59);
 		panel.add(btncliente);
 		btncliente.setForeground(new Color(0, 0, 0));
-		btncliente.setContentAreaFilled(false);
 		btncliente.setOpaque(true);
 		btncliente.setBackground(new Color(51, 255, 204));
 		btncliente.setFont(new Font("Arial", Font.BOLD, 15));
@@ -118,11 +119,12 @@ public class Telainicial extends JFrame {
 			}
 		});
 		
-		btnAutores = new JButton("Autores");
+		btnAutores = new JButton("Autor");
+		btnAutores.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnAutores.setIcon(new ImageIcon(Telainicial.class.getResource("/Imagens/autor.png")));
 		btnAutores.setBorder(UIManager.getBorder("InternalFrame.border"));
 		btnAutores.setBounds(10, 205, 160, 59);
 		panel.add(btnAutores);
-		btnAutores.setContentAreaFilled(false);
 		btnAutores.setOpaque(true);
 		btnAutores.setBackground(new Color(0, 204, 255));
 		btnAutores.setFont(new Font("Arial", Font.BOLD, 15));
@@ -134,11 +136,12 @@ public class Telainicial extends JFrame {
 			}
 		});
 		
-		btnLivros = new JButton("Livros");
+		btnLivros = new JButton("Livro");
+		btnLivros.setIcon(new ImageIcon(Telainicial.class.getResource("/Imagens/pilha-de-tres-livros.png")));
+		btnLivros.setHorizontalTextPosition(SwingConstants.LEADING);
 		btnLivros.setBorder(UIManager.getBorder("InternalFrame.border"));
 		btnLivros.setBounds(10, 291, 160, 59);
 		panel.add(btnLivros);
-		btnLivros.setContentAreaFilled(false);
 		btnLivros.setOpaque(true);
 		btnLivros.setBackground(new Color(51, 255, 204));
 		btnLivros.setFont(new Font("Arial", Font.BOLD, 15));
@@ -151,9 +154,10 @@ public class Telainicial extends JFrame {
 		});
 		
 		btnEmprestimoeDevolucoes = new JButton("<html><center>Empréstimo<br>e Devolução<html><center>");
+		btnEmprestimoeDevolucoes.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnEmprestimoeDevolucoes.setIcon(new ImageIcon(Telainicial.class.getResource("/Imagens/Sem-título-1.png")));
 		btnEmprestimoeDevolucoes.setBorder(UIManager.getBorder("InternalFrame.border"));
 		btnEmprestimoeDevolucoes.setFont(new Font("Arial", Font.BOLD, 15));
-		btnEmprestimoeDevolucoes.setContentAreaFilled(false);
 		btnEmprestimoeDevolucoes.setOpaque(true);
 		btnEmprestimoeDevolucoes.setBackground(new Color(0, 204, 255));
 		btnEmprestimoeDevolucoes.setBounds(10, 374, 160, 59);
@@ -190,24 +194,6 @@ public class Telainicial extends JFrame {
 				else {
 					System.exit(0);
 				}
-			}
-		});
-		
-		
-		btnTelaInicial = new JButton("Início");
-		btnTelaInicial.setFont(new Font("Arial", Font.BOLD, 15));
-		btnTelaInicial.setContentAreaFilled(false);
-		btnTelaInicial.setOpaque(true);
-		btnTelaInicial.setBorder(UIManager.getBorder("InternalFrame.border"));
-		btnTelaInicial.setBackground(new Color(0, 204, 255));
-		btnTelaInicial.setBounds(10, 54, 160, 59);
-		panel.add(btnTelaInicial);
-		btnTelaInicial.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				chamartelainicial();
-				
 			}
 		});
 
@@ -259,7 +245,7 @@ public class Telainicial extends JFrame {
 		panel_4 = new JPanel();
 		tabbedPane.addTab("New tab", null, panel_4, null);
 		panel_4.setLayout(null);
-		Emprestimoedevolucoes empdev= new Emprestimoedevolucoes();
+		Paneldeemprestimodevolucoes empdev= new Paneldeemprestimodevolucoes();
 		empdev.setBorder(new LineBorder(new Color(0, 0, 0), 10));
 		empdev.setSize(791,706);
 		empdev.setLocation(0, 0);
@@ -285,9 +271,6 @@ public class Telainicial extends JFrame {
 	}
 	private void chamartelaempdev() {
 		tabbedPane.setSelectedIndex(4);
-	}
-	private void chamartelainicial() {
-		tabbedPane.setSelectedIndex(0);
 	}
 	}
 

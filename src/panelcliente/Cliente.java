@@ -47,8 +47,8 @@ public class Cliente extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JButton btnInserirCliente;
-	private JButton btnDeletarLivro;
-	private JButton btnAlterarLivro;
+	private JButton btnDeletarCliente;
+	private JButton btnAlterarCliente;
 	private JLabel lblNewLabel;
 	private JPanel panel_1;
 	JTable table;
@@ -63,8 +63,8 @@ public class Cliente extends JPanel {
 		setLayout(null);
 		
 		panel = new JPanel();
+		panel.setToolTipText("Opções para inserir, atualizar,alterar e deletar dados.");
 		panel.setLayout(null);
-		panel.setToolTipText("");
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "OP\u00C7\u00D5ES", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBackground(new Color(0, 0, 0, 0));
 		panel.setBounds(28, 108, 741, 72);
@@ -74,7 +74,7 @@ public class Cliente extends JPanel {
 		btnInserirCliente = new JButton("Inserir Cliente");
 		btnInserirCliente.setHorizontalTextPosition(SwingConstants.LEADING);
 		btnInserirCliente.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/adicionar (1).png")));
-		btnInserirCliente.setToolTipText("");
+		btnInserirCliente.setToolTipText("Inserir dados do Cliente");
 		btnInserirCliente.setFont(new Font("Arial", Font.BOLD, 14));
 		btnInserirCliente.setOpaque(true);
 		btnInserirCliente.setBackground(new Color(0, 204, 0));
@@ -87,16 +87,16 @@ public class Cliente extends JPanel {
 			}
 		});
 		
-		btnDeletarLivro = new JButton("Deletar Cliente");
-		btnDeletarLivro.setHorizontalTextPosition(SwingConstants.LEADING);
-		btnDeletarLivro.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/botao-apagar.png")));
-		btnDeletarLivro.setToolTipText("");
-		btnDeletarLivro.setFont(new Font("Arial", Font.BOLD, 14));
-		btnDeletarLivro.setOpaque(true);
-		btnDeletarLivro.setBackground(Color.RED);
-		btnDeletarLivro.setBounds(552, 23, 179, 38);
-		panel.add(btnDeletarLivro);
-		btnDeletarLivro.addActionListener(new ActionListener() {
+		btnDeletarCliente = new JButton("Deletar Cliente");
+		btnDeletarCliente.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnDeletarCliente.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/botao-apagar.png")));
+		btnDeletarCliente.setToolTipText("Deletar dados do cliente da tabela");
+		btnDeletarCliente.setFont(new Font("Arial", Font.BOLD, 14));
+		btnDeletarCliente.setOpaque(true);
+		btnDeletarCliente.setBackground(Color.RED);
+		btnDeletarCliente.setBounds(552, 23, 179, 38);
+		panel.add(btnDeletarCliente);
+		btnDeletarCliente.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,6 +106,7 @@ public class Cliente extends JPanel {
 		});
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("Tabela onde contêm dados do cliente.");
 		scrollPane.setBounds(28, 192, 741, 380);
 		add(scrollPane);
 		
@@ -134,16 +135,16 @@ public class Cliente extends JPanel {
 		panel_1.setBounds(0, 131, 15, 59);
 		add(panel_1);
 		
-		btnAlterarLivro = new JButton("Alterar Cliente");
-		btnAlterarLivro.setHorizontalTextPosition(SwingConstants.LEADING);
-		btnAlterarLivro.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/escreva (1).png")));
-		btnAlterarLivro.setToolTipText("");
-		btnAlterarLivro.setFont(new Font("Arial", Font.BOLD, 14));
-		btnAlterarLivro.setOpaque(true);
-		btnAlterarLivro.setBackground(new Color(255, 255, 0));
-		btnAlterarLivro.setBounds(376, 23, 166, 38);
-		panel.add(btnAlterarLivro);
-		btnAlterarLivro.addActionListener(new ActionListener() {
+		btnAlterarCliente = new JButton("Alterar Cliente");
+		btnAlterarCliente.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnAlterarCliente.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/escreva (1).png")));
+		btnAlterarCliente.setToolTipText("Alteração de dados do cliente");
+		btnAlterarCliente.setFont(new Font("Arial", Font.BOLD, 14));
+		btnAlterarCliente.setOpaque(true);
+		btnAlterarCliente.setBackground(new Color(255, 255, 0));
+		btnAlterarCliente.setBounds(376, 23, 166, 38);
+		panel.add(btnAlterarCliente);
+		btnAlterarCliente.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -153,7 +154,7 @@ public class Cliente extends JPanel {
 		
 		JButton btnAtualizar = new JButton("Atualizar Tabela");
 		btnAtualizar.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/refresh.png")));
-		btnAtualizar.setToolTipText("");
+		btnAtualizar.setToolTipText("Atualizar a tabela de clientes para verificação de inserção ou atualização de dados");
 		btnAtualizar.setOpaque(true);
 		btnAtualizar.setHorizontalTextPosition(SwingConstants.LEADING);
 		btnAtualizar.setFont(new Font("Arial", Font.BOLD, 14));

@@ -1,4 +1,4 @@
-package panelcliente;
+package panellivro;
 
 import java.awt.EventQueue;
 
@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import conexoes.Conexaobancobib;
 
@@ -28,8 +30,11 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import java.awt.Window.Type;
@@ -37,8 +42,12 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.WindowAdapter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.JList;
+import javax.swing.DefaultComboBoxModel;
 
-public class Inserircliente extends JFrame{
+public class Inserirlivro extends JFrame{
 	
 	Conexaobancobib dao = new Conexaobancobib();
 	private Connection con;
@@ -46,23 +55,21 @@ public class Inserircliente extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabelnome;
-	private JTextField nome;
+	private JTextField titulo;
 	private JLabel lblNewLabeldatanascimento;
-	private JLabel lblNewLabeltelefone;
 	private JLabel lblNewLabelemail;
-	private JTextField email;
+	private JTextField subtitulo;
 	private JLabel lblNewLabelcpf;
 	private JLabel lblNewLabelend;
-	private JTextField endereco;
-	JButton btnInserirCliente;
+	private JTextField editora;
+	JButton btnInserirLivro;
 	private JLabel lblId;
 	private JTextField id;
 	private static String acao;
-	Cliente cliente = new Cliente(); 
-	private JFormattedTextField datanascimento;
-	private JFormattedTextField cpf;
-	private JFormattedTextField telefone;
-	
+	Livro cliente = new Livro(); 
+	private JFormattedTextField datapublicacao;
+	private JFormattedTextField isbn;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -78,9 +85,10 @@ public class Inserircliente extends JFrame{
 		eventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Inserircliente frame = new Inserircliente(acao);
+					Inserirlivro frame = new Inserirlivro(acao);
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -91,12 +99,12 @@ public class Inserircliente extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Inserircliente(String acao) {
+	public Inserirlivro(String acao) {
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						nome.requestFocus();
+						titulo.requestFocus();
 					}
 			}
 		});
@@ -104,13 +112,13 @@ public class Inserircliente extends JFrame{
 		setResizable(false);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 600, 306);
+		setBounds(100, 100, 600, 307);
 		contentPane = new JPanel();
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					nome.requestFocus();
+					titulo.requestFocus();
 				}
 			}
 		});
@@ -119,12 +127,12 @@ public class Inserircliente extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-				MaskFormatter cpfform = null;
+				MaskFormatter isbnform = null;
 		try {
-			cpfform = new MaskFormatter("###.###.###-##");
+			isbnform = new MaskFormatter("#############");
 		} catch (ParseException e) {
 			System.out.println("Erro ao criar a máscara");
-		}
+		} 
 		
 		MaskFormatter dataform = null; // TODO ele coloca o formattedtextfield como campo para colocar datas 
 		try {
@@ -133,179 +141,148 @@ public class Inserircliente extends JFrame{
 			System.out.println("Erro ao criar a máscara");
 		}
 		
-		MaskFormatter telefoneform = null; //TODO formato de telefone
-		try {
-			telefoneform = new MaskFormatter("(##) 9 ####-####");
-		} catch (ParseException e) {
-			System.out.println("Erro ao criar a máscara");
-		}
 		
-		
-		cpf = new JFormattedTextField(cpfform);
-		cpf.addKeyListener(new KeyAdapter() {
+		isbn = new JFormattedTextField(isbnform);
+		isbn.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					telefone.requestFocus();
+					editora.requestFocus();
 					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						datanascimento.requestFocus();
+						datapublicacao.requestFocus();
 					}
 			}
 		});
-		cpf.setFont(new Font("Arial", Font.PLAIN, 14));
-		cpf.setBounds(361, 123, 179, 24);
-		contentPane.add(cpf);
+		isbn.setFont(new Font("Arial", Font.PLAIN, 14));
+		isbn.setBounds(361, 123, 179, 24);
+		contentPane.add(isbn);
 		
-		telefone = new JFormattedTextField(telefoneform);
-		telefone.addKeyListener(new KeyAdapter() {
+		
+		datapublicacao = new JFormattedTextField(dataform);
+		datapublicacao.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					btnInserirCliente.requestFocus();
+					isbn.requestFocus();
 					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						cpf.requestFocus();
+						comboBox.requestFocus();
 					}
 			}
 		});
-		telefone.setFont(new Font("Arial", Font.PLAIN, 14));
-		telefone.setBounds(361, 168, 179, 24);
-		contentPane.add(telefone);
+		datapublicacao.setFont(new Font("Arial", Font.PLAIN, 14));
+		datapublicacao.setBounds(361, 78, 136, 24);
+		contentPane.add(datapublicacao);
 		
 		
-		datanascimento = new JFormattedTextField(dataform);
-		datanascimento.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					cpf.requestFocus();
-					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						endereco.requestFocus();
-					}
-			}
-		});
-		datanascimento.setFont(new Font("Arial", Font.PLAIN, 14));
-		datanascimento.setBounds(361, 78, 136, 24);
-		contentPane.add(datanascimento);
-		
-		
-		lblNewLabelnome = new JLabel("*Nome:");
+		lblNewLabelnome = new JLabel("*Título:");
 		lblNewLabelnome.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblNewLabelnome.setBounds(35, 58, 293, 20);
 		contentPane.add(lblNewLabelnome);
 		
-		nome = new JTextField();
-		nome.addKeyListener(new KeyAdapter() {
+		titulo = new JTextField();
+		titulo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					email.requestFocus();
+					subtitulo.requestFocus();
 					}
 				}
 				
 		});
-		nome.setFont(new Font("Arial", Font.PLAIN, 14));
-		nome.setBounds(35, 73, 293, 24);
-		contentPane.add(nome);
-		nome.setColumns(10);
+		titulo.setFont(new Font("Arial", Font.PLAIN, 14));
+		titulo.setBounds(35, 73, 293, 24);
+		contentPane.add(titulo);
+		titulo.setColumns(10);
 		
-		lblNewLabeldatanascimento = new JLabel("Data de nascimento:");
+		lblNewLabeldatanascimento = new JLabel("Data de publicação:");
 		lblNewLabeldatanascimento.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblNewLabeldatanascimento.setBounds(361, 63, 163, 20);
 		contentPane.add(lblNewLabeldatanascimento);
 		
-		lblNewLabeltelefone = new JLabel("Telefone:");
-		lblNewLabeltelefone.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblNewLabeltelefone.setBounds(361, 150, 103, 26);
-		contentPane.add(lblNewLabeltelefone);
-		
-		lblNewLabelemail = new JLabel("Email:");
+		lblNewLabelemail = new JLabel("Subtítulo:");
 		lblNewLabelemail.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblNewLabelemail.setBounds(35, 108, 103, 20);
 		contentPane.add(lblNewLabelemail);
 		
-		email = new JTextField();
-		email.addKeyListener(new KeyAdapter() {
+		subtitulo = new JTextField();
+		subtitulo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					endereco.requestFocus();
+					comboBox.requestFocus();
 					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						nome.requestFocus();
+						titulo.requestFocus();
 					}
 			}
 		});
-		email.setFont(new Font("Arial", Font.PLAIN, 14));
-		email.setColumns(10);
-		email.setBounds(35, 125, 293, 24);
-		contentPane.add(email);
+		subtitulo.setFont(new Font("Arial", Font.PLAIN, 14));
+		subtitulo.setColumns(10);
+		subtitulo.setBounds(35, 125, 293, 24);
+		contentPane.add(subtitulo);
 		
-		lblNewLabelcpf = new JLabel("*CPF:");
+		lblNewLabelcpf = new JLabel("*ISBN:");
 		lblNewLabelcpf.setFont(new Font("Calibri", Font.PLAIN, 16));
 		lblNewLabelcpf.setBounds(361, 110, 103, 17);
 		contentPane.add(lblNewLabelcpf);
 		
-		lblNewLabelend = new JLabel("Endereço:");
+		lblNewLabelend = new JLabel("Editora:");
 		lblNewLabelend.setFont(new Font("Calibri", Font.PLAIN, 16));
-		lblNewLabelend.setBounds(35, 151, 103, 20);
+		lblNewLabelend.setBounds(361, 151, 179, 20);
 		contentPane.add(lblNewLabelend);
 		
-		endereco = new JTextField();
-		endereco.addKeyListener(new KeyAdapter() {
+		editora = new JTextField();
+		editora.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					datanascimento.requestFocus();
+					btnInserirLivro.requestFocus();
 					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-						email.requestFocus();
+						isbn.requestFocus();
 					}
 			}
 		});
-		endereco.setFont(new Font("Arial", Font.PLAIN, 14));
-		endereco.setColumns(10);
-		endereco.setBounds(35, 168, 293, 24);
-		contentPane.add(endereco);
+		editora.setFont(new Font("Arial", Font.PLAIN, 14));
+		editora.setColumns(10);
+		editora.setBounds(361, 168, 179, 24);
+		contentPane.add(editora);
 		
-		btnInserirCliente = new JButton("");
-		btnInserirCliente.addKeyListener(new KeyAdapter() {
+		btnInserirLivro = new JButton("");
+		btnInserirLivro.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					telefone.requestFocus();
+					comboBox.requestFocus();
 				}
 			}
 		});
-		btnInserirCliente.setHorizontalTextPosition(SwingConstants.LEADING);
-		btnInserirCliente.setToolTipText("");
-		btnInserirCliente.setOpaque(true);
-		btnInserirCliente.setFont(new Font("Arial", Font.BOLD, 14));
-		btnInserirCliente.setBackground(new Color(0, 204, 0));
-		btnInserirCliente.setBounds(225, 221, 161, 38);
-		contentPane.add(btnInserirCliente);
-		btnInserirCliente.addActionListener(new ActionListener() {
+		btnInserirLivro.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnInserirLivro.setToolTipText("");
+		btnInserirLivro.setOpaque(true);
+		btnInserirLivro.setFont(new Font("Arial", Font.BOLD, 14));
+		btnInserirLivro.setBackground(new Color(0, 204, 0));
+		btnInserirLivro.setBounds(225, 219, 161, 38);
+		contentPane.add(btnInserirLivro);
+		btnInserirLivro.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				if(acao.equals("Inserir")) {
 					boolean checar =
-							naoativo(nome)||
-							naoativo(cpf);
+							naoativo(titulo)||
+							naoativo(isbn);
 					if(checar) {
 						JOptionPane.showMessageDialog(null, "Campos Não Preenchidos, Preenche-os!!!","ATENÇÃO",1);
-					}else if(verificarnomeusuario()==true) {
-						
 					}else {
 						metodoinserir();
 					}
 					
 				}else if(acao.equals("Alterar")) {
 						boolean checar =
-								naoativo(nome)||
-								naoativo(cpf);
-						if(checar || verificarnomeusuario()==true) {
+								naoativo(titulo)||
+								naoativo(isbn);
+						if(checar) {
 							JOptionPane.showMessageDialog(null, "Campos Não Preenchidos, Preenche-os!!!","ATENÇÃO",1);
-						}else if(verificarnomeusuario()==true) {
-							
 						}else {
 							metodoalterar();
 						}
@@ -325,18 +302,61 @@ public class Inserircliente extends JFrame{
 		id.setColumns(10);
 		id.setBounds(35, 26, 75, 24);
 		contentPane.add(id);
+		
+		JLabel lblAutor = new JLabel("Autor:");
+		lblAutor.setFont(new Font("Calibri", Font.PLAIN, 16));
+		lblAutor.setBounds(35, 154, 103, 20);
+		contentPane.add(lblAutor);
+		
+		comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					datapublicacao.requestFocus();
+					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						subtitulo.requestFocus();
+					}
+			}
+		});
+		comboBox.setBounds(35, 169, 293, 22);
+		contentPane.add(comboBox);
+		preencherComboBox();
+		AutoCompleteDecorator.decorate(comboBox);
 	}
+	
+	 private void preencherComboBox() {
+	        String sql = "SELECT nome_autor FROM autor";
+	        try {
+	            Connection con = dao.conexaobib();
+	            PreparedStatement stmt = con.prepareStatement(sql);
+	            ResultSet rs = stmt.executeQuery();
+	            List<String> autores = new ArrayList<>();
+	            autores.add("--Selecione Autor--");
+	            while (rs.next()) {
+	                autores.add(rs.getString("nome_autor"));
+	            }
+	            comboBox.setModel(new DefaultComboBoxModel<>(autores.toArray(new String[1])));
+	            con.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Erro ao carregar autores", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
 
 	private void metodoalterar() {
-		String sql = "UPDATE usuario SET nome = ?, datanascimento = ?, email = ? , endereco= ?, cpf = ?, telefone = ? WHERE id = ? ";
+		String dadoselecionado = (String) comboBox.getSelectedItem();
+		
+		String sql = "UPDATE livro SET titulo = ?, subtitulo = ?, editora = ? , datapublicacao= ?, isbn = ?, autor = ? WHERE id = ? ";
 		try { con = dao.conexaobib();
 				PreparedStatement registro = con.prepareStatement(sql);{
-				registro.setString(1, nome.getText().toString());
-				registro.setString(2, datanascimento.getText().toString());
-				registro.setString(3, email.getText().toString());
-				registro.setString(4, endereco.getText().toString());
-				registro.setString(5, cpf.getText().toString());
-				registro.setString(6, telefone.getText().toString());
+				registro.setString(1, titulo.getText().toString());
+				registro.setString(2, subtitulo.getText().toString());
+				registro.setString(3, editora.getText().toString());
+				registro.setString(4, datapublicacao.getText().toString());
+				registro.setString(5, isbn.getText().toString());
+				registro.setString(6, dadoselecionado);
 				registro.setString(7, id.getText().toString());
 			registro.executeUpdate();
 			con.close();
@@ -350,16 +370,16 @@ public class Inserircliente extends JFrame{
 	
 
 	private void metodoinserir() {
-		
-		String sql = "INSERT INTO usuario(nome,datanascimento, email, endereco, cpf, telefone) VALUES(?,?,?,?,?,?)"; //click do botão vai inserir dados essas sao os metodos para conexão e inserção de dados
+		String dadoselecionado = (String) comboBox.getSelectedItem();
+		String sql = "INSERT INTO livro(titulo, subtitulo, editora, datapublicacao, isbn, autor) VALUES(?,?,?,?,?,?)"; //click do botão vai inserir dados essas sao os metodos para conexão e inserção de dados
 		try {con = dao.conexaobib();
 			PreparedStatement registro = con.prepareStatement(sql);
-			registro.setString(1, nome.getText().toString());
-			registro.setString(2, datanascimento.getText().toString());
-			registro.setString(3, email.getText().toString());
-			registro.setString(4, endereco.getText().toString());
-			registro.setString(5, cpf.getText().toString());
-			registro.setString(6, telefone.getText().toString());
+			registro.setString(1, titulo.getText().toString());
+			registro.setString(2, subtitulo.getText().toString());
+			registro.setString(3, editora.getText().toString());
+			registro.setString(4, datapublicacao.getText().toString());
+			registro.setString(5, isbn.getText().toString());
+			registro.setString(6, dadoselecionado);
 			registro.execute();
 			con.close();
 			
@@ -377,33 +397,27 @@ public class Inserircliente extends JFrame{
 		this.acao = acao;
 	}
 	
-	public void preenchercampos(int codigo, String nomepessoa,String datadenascimento,String emailpessoal,String enderecocompleto,String cpfusuario,String telefoneusuario) {
+	public void preenchercampos(int codigo, String titulolivro,String subtitulolivro,String autorlivro, String editoralivro,String datapublicacaolivro,String isbnlivro) {
 		id.setText(String.valueOf(codigo));
-		nome.setText(String.valueOf(nomepessoa));
-		datanascimento.setText(String.valueOf(datadenascimento));
-		email.setText(String.valueOf(emailpessoal));
-		endereco.setText(String.valueOf(enderecocompleto));
-		cpf.setText(String.valueOf(cpfusuario));
-		telefone.setText(String.valueOf(telefoneusuario));
+		titulo.setText(String.valueOf(titulolivro));
+		subtitulo.setText(String.valueOf(subtitulolivro));
+		comboBox.setSelectedItem(String.valueOf(autorlivro));
+		editora.setText(String.valueOf(editoralivro));
+		datapublicacao.setText(String.valueOf(datapublicacaolivro));
+		isbn.setText(String.valueOf(isbnlivro));
 	}
 	
 	public void limparcampos() {
-		nome.setText("");
-		datanascimento.setText("");
-		email.setText("");
-		endereco.setText("");
-		cpf.setText("");
-		telefone.setText("");
+		titulo.setText("");
+		datapublicacao.setText("");
+		subtitulo.setText("");
+		editora.setText("");
+		isbn.setText("");
+		comboBox.setSelectedItem(null);;
 	}
 	
 	private boolean naoativo(JTextField testedados) {
 		return testedados.getText().toString().trim().isEmpty();
-	}
-	
-	public boolean verificarnomeusuario() {
-		Verificarusuario veri = new Verificarusuario();
-		String nomeusuario = cpf.getText().toString();
-		return veri.verificador(nomeusuario);
 	}
 }
 	
