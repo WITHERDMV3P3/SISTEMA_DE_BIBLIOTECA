@@ -515,6 +515,10 @@ public class Inserirempdev extends JFrame{
 		System.out.println("ERRO AO ATUALIZAR A TABELA: "+ e.getMessage());
 	}
 	}
+	
+	public void nada() {
+		
+	}
 }
 	
 	
