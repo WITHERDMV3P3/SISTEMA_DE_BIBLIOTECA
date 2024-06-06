@@ -277,6 +277,8 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 		
 		else if(acaoempdev=="Inserir emprestimo") {
 			
+			
+			
 		inseriremprestimodevolucao.setVisible(true);
 		inseriremprestimodevolucao.setLocationRelativeTo(null);
 		JButton button = inseriremprestimodevolucao.btnInserirEmprestimo;

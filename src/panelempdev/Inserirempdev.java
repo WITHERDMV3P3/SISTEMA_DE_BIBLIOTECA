@@ -163,7 +163,7 @@ public class Inserirempdev extends JFrame{
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				// TODO Auto-generated method stub
+				calculodata();
 				
 			}
 			
@@ -430,13 +430,14 @@ public class Inserirempdev extends JFrame{
 		String dadolivro = (String) comboBoxlivro.getSelectedItem();
 		String dadocliente = (String) comboBoxCliente.getSelectedItem();
 		
-		String sql = "INSERT INTO empedev(usuario, livro, dataemprestimo, dataprevisao) VALUES(?,?,?,?)"; //click do botão vai inserir dados essas sao os metodos para conexão e inserção de dados
+		String sql = "INSERT INTO empedev(usuario, livro, dataemprestimo,dataprevisao,datadevolucao) VALUES(?,?,?,?,?)"; //click do botão vai inserir dados essas sao os metodos para conexão e inserção de dados
 		try {con = dao.conexaobib();
 			PreparedStatement registro = con.prepareStatement(sql);
 			registro.setString(1, dadocliente);
 			registro.setString(2, dadolivro);
 			registro.setString(3, Dataemprestimo.getText().toString());
 			registro.setString(4, Dataprevisao.getText().toString());
+			registro.setString(5, " ");
 			registro.execute();
 			con.close();
 			
