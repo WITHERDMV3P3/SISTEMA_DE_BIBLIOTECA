@@ -60,7 +60,7 @@ public class Inserircliente extends JFrame{
 	private static String acao;
 	Cliente cliente = new Cliente(); 
 	private JFormattedTextField datanascimento;
-	private JFormattedTextField cpf;
+	JFormattedTextField cpf;
 	private JFormattedTextField telefone;
 	
 
@@ -302,10 +302,8 @@ public class Inserircliente extends JFrame{
 						boolean checar =
 								naoativo(nome)||
 								naoativo(cpf);
-						if(checar || verificarnomeusuario()==true) {
+						if(checar) {
 							JOptionPane.showMessageDialog(null, "Campos Não Preenchidos, Preenche-os!!!","ATENÇÃO",1);
-						}else if(verificarnomeusuario()==true) {
-							
 						}else {
 							metodoalterar();
 						}
@@ -328,16 +326,15 @@ public class Inserircliente extends JFrame{
 	}
 
 	private void metodoalterar() {
-		String sql = "UPDATE usuario SET nome = ?, datanascimento = ?, email = ? , endereco= ?, cpf = ?, telefone = ? WHERE id = ? ";
+		String sql = "UPDATE usuario SET nome = ?, datanascimento = ?, email = ? , endereco= ?, telefone = ? WHERE id = ? ";
 		try { con = dao.conexaobib();
 				PreparedStatement registro = con.prepareStatement(sql);{
 				registro.setString(1, nome.getText().toString());
 				registro.setString(2, datanascimento.getText().toString());
 				registro.setString(3, email.getText().toString());
 				registro.setString(4, endereco.getText().toString());
-				registro.setString(5, cpf.getText().toString());
-				registro.setString(6, telefone.getText().toString());
-				registro.setString(7, id.getText().toString());
+				registro.setString(5, telefone.getText().toString());
+				registro.setString(6, id.getText().toString());
 			registro.executeUpdate();
 			con.close();
 		}} catch (SQLException e) {

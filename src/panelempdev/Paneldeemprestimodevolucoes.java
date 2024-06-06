@@ -168,8 +168,28 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 		btnAtualizar.setHorizontalTextPosition(SwingConstants.LEADING);
 		btnAtualizar.setFont(new Font("Arial", Font.BOLD, 14));
 		btnAtualizar.setBackground(Color.BLACK);
-		btnAtualizar.setBounds(275, 63, 175, 38);
+		btnAtualizar.setBounds(53, 64, 175, 38);
 		panel.add(btnAtualizar);
+		
+		JButton btnImprimirempAtivos = new JButton("<html><center>Imprimir <br>Empréstimos Ativos<html><center>");
+		btnImprimirempAtivos.setIcon(new ImageIcon(Paneldeemprestimodevolucoes.class.getResource("/Imagens/imprimir-sinal-de-ferramenta-de-interface-preenchida.png")));
+		btnImprimirempAtivos.setToolTipText("<html><center>Imprimir a tabela de empréstimo e devolução <br>para verificar empréstimos ativos<html><center>");
+		btnImprimirempAtivos.setOpaque(true);
+		btnImprimirempAtivos.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnImprimirempAtivos.setFont(new Font("Arial", Font.BOLD, 14));
+		btnImprimirempAtivos.setBackground(Color.BLACK);
+		btnImprimirempAtivos.setBounds(256, 64, 210, 38);
+		panel.add(btnImprimirempAtivos);
+		
+		JButton btnImprimirempVencidos = new JButton("<html><center>Imprimir <br>Empréstimos Vencidos<html><center>");
+		btnImprimirempVencidos.setIcon(new ImageIcon(Paneldeemprestimodevolucoes.class.getResource("/Imagens/imprimir-sinal-de-ferramenta-de-interface-preenchida.png")));
+		btnImprimirempVencidos.setToolTipText("<html><center>Imprimir a tabela de empréstimo e devolução <br>para verificar empréstimos vencidos<html><center>");
+		btnImprimirempVencidos.setOpaque(true);
+		btnImprimirempVencidos.setHorizontalTextPosition(SwingConstants.LEADING);
+		btnImprimirempVencidos.setFont(new Font("Arial", Font.BOLD, 14));
+		btnImprimirempVencidos.setBackground(Color.BLACK);
+		btnImprimirempVencidos.setBounds(489, 64, 228, 38);
+		panel.add(btnImprimirempVencidos);
 		btnAtualizar.addActionListener(new ActionListener() {
 			
 			@Override
@@ -361,6 +381,4 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 			System.out.println(e.getMessage());
 	}
 	}
-	
-	
 }

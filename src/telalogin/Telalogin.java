@@ -31,19 +31,22 @@ import java.awt.Image;
 
 import javax.swing.JEditorPane;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Telalogin extends JFrame {
 	
 	Conexaobancobib dao = new Conexaobancobib();
 	private Connection con;
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPanel panel;
 	private JLabel imagem;
 	private JLabel label;
-	private JPasswordField passwordField;
 	private JButton btnSair;
+	private JTextField passwordField;
 
 	/**
 	 * Launch the application.
@@ -100,6 +103,14 @@ public class Telalogin extends JFrame {
 		btnRegistrar.setBackground(Color.lightGray);
 		
 		JButton btnNewButton = new JButton("ENTRAR");
+		btnNewButton.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						passwordField.requestFocus();
+					}
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(Telalogin.class.getResource("/Imagens/entrar (1).png")));
 		btnNewButton.setBounds(36, 239, 129, 35);
 		panel.add(btnNewButton);
@@ -133,6 +144,14 @@ public class Telalogin extends JFrame {
 		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		textField = new JTextField();
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					passwordField.requestFocus();
+					}
+			}
+		});
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setBounds(109, 123, 163, 27);
 		panel.add(textField);
@@ -153,9 +172,21 @@ public class Telalogin extends JFrame {
 		label.setBounds(10, 45, 361, 49);
 		panel.add(label);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JTextField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					btnNewButton.requestFocus();
+					}else if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+						textField.requestFocus();
+					}
+			}
+		});
 		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField.setBounds(109, 180, 163, 27);
+		passwordField.setFont(new Font("Arial", Font.PLAIN, 14));
+		passwordField.setColumns(10);
+		passwordField.setBounds(109, 178, 163, 27);
 		panel.add(passwordField);
 		
 		
@@ -194,7 +225,7 @@ public class Telalogin extends JFrame {
 	}
 
 	public void entrar() {
-		String sql = "SELECT * FROM biblioteca_dados WHERE usuario = ? AND senha = ?";
+		String sql = "SELECT * FROM biblioteca_login WHERE usuario = ? AND senha = ?";
 		try { con = dao.conexaobib();
 		PreparedStatement registro = con.prepareStatement(sql);
 			registro.setString(1, textField.getText().toString());
@@ -207,6 +238,7 @@ public class Telalogin extends JFrame {
 				this.setVisible(false);
 			}else {
 				JOptionPane.showMessageDialog(null, "Usuário ou senha incorreta ou não registrado, tente novamente","ATENÇÃO",2);
+				Limparcampos();
 			}
 			con.close();
 			registro.close();
@@ -216,10 +248,15 @@ public class Telalogin extends JFrame {
 		}
 	}
 	
+	private void Limparcampos() {
+		textField.setText("");
+		passwordField.setText("");
+	}
+
 	private void registar() {
 		
-		String sql = "INSERT INTO biblioteca_dados(usuario,senha) VALUES (?,?)";
-		String sql2 = "SELECT * FROM biblioteca_dados WHERE usuario = ?";
+		String sql = "INSERT INTO biblioteca_login(usuario,senha) VALUES (?,?)";
+		String sql2 = "SELECT * FROM biblioteca_login WHERE usuario = ?";
 		
 		try {con = dao.conexaobib();
 			PreparedStatement consultar = con.prepareStatement(sql2);
@@ -229,7 +266,7 @@ public class Telalogin extends JFrame {
 				if(resultadoconsultar.next()) {
 					
 					JOptionPane.showMessageDialog(null, "Usuário existente, tente novamente","ATENÇÃO",2);
-					
+					Limparcampos();
 				}else {
 					
 					PreparedStatement registro = con.prepareStatement(sql);
@@ -238,7 +275,7 @@ public class Telalogin extends JFrame {
 					registro.execute();
 					registro.close();
 					JOptionPane.showMessageDialog(null, "Registrado com sucesso","ATENÇÃO",1);
-				
+					Limparcampos();
 				}
 				
 				con.close();

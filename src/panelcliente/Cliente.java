@@ -16,6 +16,7 @@ import java.sql.Time;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -230,6 +231,12 @@ public class Cliente extends JPanel {
 		button.setText("Alterar Cliente");
 		button.setIcon(new ImageIcon(Cliente.class.getResource("/Imagens/escreva (1).png")));
 		button.setBackground(new Color(255, 255, 0));
+		
+		JFormattedTextField verificarcpf = inserircliente.cpf;
+		
+		verificarcpf.setEnabled(false);
+		verificarcpf.setEditable(false);
+		
 		table.clearSelection();
 		tablee.setRowCount(0);
 		atualizar();
