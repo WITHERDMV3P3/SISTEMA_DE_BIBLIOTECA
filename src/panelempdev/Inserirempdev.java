@@ -407,14 +407,15 @@ public class Inserirempdev extends JFrame{
 		String dadolivro = (String) comboBoxlivro.getSelectedItem();
 		String dadocliente = (String) comboBoxCliente.getSelectedItem();
 		
-		String sql = "UPDATE empedev SET usuario = ?, livro = ?, dataemprestimo = ? , datadevolucao= ? WHERE id = ? "; 
+		String sql = "UPDATE empedev SET usuario = ?, livro = ?, dataemprestimo = ? , datadevolucao= ?, dataprevisao = ? WHERE id = ? "; 
 		try { con = dao.conexaobib();
 				PreparedStatement registro = con.prepareStatement(sql);{
 				registro.setString(1, dadocliente);
 				registro.setString(2, dadolivro);
-				registro.setString(3, Dataemprestimo.getText().toString());
+				registro.setString(3, Dataemprestimo.getText().toString()); // TODO tenho que colocar pra alterar pra ele alterar tbm a previsão
 				registro.setString(4, Datadevolucao.getText().toString());
-				registro.setString(5, id.getText().toString());
+				registro.setString(5, Dataprevisao.getText().toString());				
+				registro.setString(6, id.getText().toString());
 			registro.executeUpdate();
 			con.close();
 		}} catch (SQLException e) {
@@ -437,7 +438,7 @@ public class Inserirempdev extends JFrame{
 			registro.setString(2, dadolivro);
 			registro.setString(3, Dataemprestimo.getText().toString());
 			registro.setString(4, Dataprevisao.getText().toString());
-			registro.setString(5, " ");
+			registro.setString(5, Datadevolucao.getText().toString());
 			registro.execute();
 			con.close();
 			

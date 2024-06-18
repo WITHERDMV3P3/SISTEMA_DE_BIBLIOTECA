@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +28,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import conexoes.Conexaobancobib;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 import javax.swing.JScrollPane;
 
@@ -172,6 +180,11 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 		panel.add(btnAtualizar);
 		
 		JButton btnImprimirempAtivos = new JButton("<html><center>Imprimir <br>Empréstimos Ativos<html><center>");
+		btnImprimirempAtivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				emprestimoativo();
+			}
+		});
 		btnImprimirempAtivos.setIcon(new ImageIcon(Paneldeemprestimodevolucoes.class.getResource("/Imagens/imprimir-sinal-de-ferramenta-de-interface-preenchida.png")));
 		btnImprimirempAtivos.setToolTipText("<html><center>Imprimir a tabela de empréstimo e devolução <br>para verificar empréstimos ativos<html><center>");
 		btnImprimirempAtivos.setOpaque(true);
@@ -182,6 +195,11 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 		panel.add(btnImprimirempAtivos);
 		
 		JButton btnImprimirempVencidos = new JButton("<html><center>Imprimir <br>Empréstimos Vencidos<html><center>");
+		btnImprimirempVencidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				emprestimovencido();
+			}
+		});
 		btnImprimirempVencidos.setIcon(new ImageIcon(Paneldeemprestimodevolucoes.class.getResource("/Imagens/imprimir-sinal-de-ferramenta-de-interface-preenchida.png")));
 		btnImprimirempVencidos.setToolTipText("<html><center>Imprimir a tabela de empréstimo e devolução <br>para verificar empréstimos vencidos<html><center>");
 		btnImprimirempVencidos.setOpaque(true);
@@ -382,5 +400,47 @@ public class Paneldeemprestimodevolucoes extends JPanel {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 	}
+	}
+	
+	public void emprestimoativo() {
+		URL caminho = Paneldeemprestimodevolucoes.class.getResource("/relatorio/Relatorioativos.jrxml");
+	//	String caminho = "C:\\Users\\CRISTIAN EDEL\\OneDrive\\Área de Trabalho\\TESTE\\SISTEMA_DE_BIBLIOTECA3\\BIBLIOTECA2\\src\\relatorio\\Relatorioativos.jrxml";
+	//	String total = caminho.substring(0, caminho.lastIndexOf('\\')) + "\\relatorio\\Relatorioativos.jrxml";
+		try {
+			
+			con = dao.conexaobib();
+			JasperReport jasper;
+			try {
+				jasper = JasperCompileManager.compileReport(caminho.openStream());
+				JasperPrint print = JasperFillManager.fillReport(jasper, null,con);
+				JasperViewer.viewReport(print,false);
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void emprestimovencido() {
+		URL caminho = Paneldeemprestimodevolucoes.class.getResource("/relatorio/Relatoriovencidos.jrxml");
+	//	String caminho = "C:\\Users\\CRISTIAN EDEL\\OneDrive\\Área de Trabalho\\TESTE\\SISTEMA_DE_BIBLIOTECA3\\BIBLIOTECA2\\src\\relatorio\\Relatorioativos.jrxml";
+	//	String total = caminho.substring(0, caminho.lastIndexOf('\\')) + "\\relatorio\\Relatorioativos.jrxml";
+		try {
+			
+			con = dao.conexaobib();
+			JasperReport jasper;
+			try {
+				jasper = JasperCompileManager.compileReport(caminho.openStream());
+				JasperPrint print = JasperFillManager.fillReport(jasper, null,con);
+				JasperViewer.viewReport(print,false);
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
